@@ -1,4 +1,4 @@
-# Tic-Tac-Toe Game - Part 2 (Player Input + Validation)
+# Tic-Tac-Toe Game - Part 3 (Game Loop + Turn Switching)
 
 board = [
     [" ", " ", " "],
@@ -13,17 +13,18 @@ def print_board():
         print("-" * 9)
 
 def is_valid_move(row, col):
-    # Check boundaries and empty space
-    if 0 <= row < 3 and 0 <= col < 3 and board[row][col] == " ":
-        return True
-    return False
+    return 0 <= row < 3 and 0 <= col < 3 and board[row][col] == " "
 
 def make_move(player):
     while True:
         print(f"\nPlayer {player}'s turn")
 
-        row = int(input("Enter row (0-2): "))
-        col = int(input("Enter column (0-2): "))
+        try:
+            row = int(input("Enter row (0-2): "))
+            col = int(input("Enter column (0-2): "))
+        except ValueError:
+            print("Please enter numbers only!")
+            continue
 
         if is_valid_move(row, col):
             board[row][col] = player
@@ -31,11 +32,21 @@ def make_move(player):
         else:
             print("Invalid move! Try again.")
 
-# ---- Testing Part 2 ----
-print_board()
+def play_game():
+    current_player = "X"
 
-make_move("X")
-print_board()
+    for turn in range(9):   # Maximum 9 moves in Tic-Tac-Toe
+        print_board()
+        make_move(current_player)
 
-make_move("O")
-print_board()
+        # Switch player
+        if current_player == "X":
+            current_player = "O"
+        else:
+            current_player = "X"
+
+    print_board()
+    print("\nGame Over! (Win/Draw check comes in Part 4)")
+
+# Start the game
+play_game()
