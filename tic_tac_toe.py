@@ -1,4 +1,4 @@
-# Tic-Tac-Toe Game - Part 3 (Game Loop + Turn Switching)
+# Tic-Tac-Toe Game - (Game Loop + Turn Switching)
 
 board = [
     [" ", " ", " "],
